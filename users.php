@@ -6,9 +6,9 @@
 	header('Content-Type: application/json');
 
 	// Include action.php file
-	require_once 'UserModel.php';
+	include_once 'db.php';
 	// Create object of Users class
-	$user = new UserModel();
+	$user = new Database();
 
 	// create a api variable to get HTTP method dynamically
 	$api = $_SERVER['REQUEST_METHOD'];
