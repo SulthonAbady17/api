@@ -8,17 +8,17 @@
         public function fetch($id = 0) {
             $sql = 'SELECT * FROM users';
             if ($id != 0) {
-            $sql .= ' WHERE id = :id';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute(['id' => $id]);
-            $rows = $stmt->fetchAll();
-            return $rows;
+                $sql .= ' WHERE id = :id';
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute(['id' => $id]);
+                $rows = $stmt->fetchAll();
+                return $rows;
             } else {
             // var_dump($sql);
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            $rows = $stmt->fetchAll();
-            return $rows;
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute();
+                $rows = $stmt->fetchAll();
+                return $rows;
             }
         }
 

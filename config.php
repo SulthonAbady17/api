@@ -10,6 +10,8 @@
 	  // conn variable
 	  protected $conn = null;
 
+	  private $stmt;
+
 	  // Constructor Function
 	  public function __construct() {
 	    try {
@@ -33,6 +35,11 @@
 	  // JSON Format Converter Function
 	  public function message($content, $status) {
 	    return json_encode(['message' => $content, 'error' => $status]);
+	  }
+
+	  public function rowCount()
+	  {
+		return $this->stmt->rowCount();
 	  }
 	}
 
