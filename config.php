@@ -36,11 +36,6 @@
 	  public function message($content, $status) {
 	    return json_encode(['message' => $content, 'error' => $status]);
 	  }
-
-	  public function rowCount()
-	  {
-		return $this->stmt->rowCount();
-	  }
 	}
 
 ?>
