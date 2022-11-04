@@ -6,20 +6,20 @@
 	class Database extends Config {
         // Fetch all or a single user from database
         public function fetch($id = 0) {
-            $sql = 'SELECT * FROM users';
-            if ($id != 0) {
-                $sql .= ' WHERE id = :id';
-                $stmt = $this->conn->prepare($sql);
-                $stmt->execute(['id' => $id]);
-                $rows = $stmt->fetchAll();
-                return $rows;
-            } else {
-            // var_dump($sql);
-                $stmt = $this->conn->prepare($sql);
-                $stmt->execute();
-                $rows = $stmt->fetchAll();
-                return $rows;
-            }
+            $sql = 'SELECT * FROM users WHERE id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $rows; 
+        }
+
+        public function fetchAll()
+        {
+            $sql = "SELECT * FROM users";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $rows = $stmt->fetchAll();
+            return $rows;
         }
 
         // Insert an user in the database

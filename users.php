@@ -1,4 +1,5 @@
 <?php
+
 	// Include CORS headers
 	header('Access-Control-Allow-Origin: *');
 	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
@@ -19,9 +20,16 @@
 	// Get all or a single user from database
 	if ($api == 'GET') {
 	  if ($id != 0) {
-	    $data = $user->fetch($id);
+		$row = $user->fetch($id);
+		if(count($row) > 0) {
+			$data = $user->fetch($id);
+		} else {
+			// $data = ['message' => 'User not found!', 'error' => true];
+			echo $user->message('User not found!', true);
+			exit;
+		}
 	  } else {
-	    $data = $user->fetch();
+	    $data = $user->fetchAll();
 	  }
 	  echo json_encode($data);
 	}
