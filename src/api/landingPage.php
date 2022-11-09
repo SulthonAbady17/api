@@ -6,9 +6,9 @@ class landingPage extends Api {
         if($method == "GET") {
             $data = [
                 'title' => 'Home',
-                'brand' => 'Bakti Gay',
+                'brand' => 'Sulthon',
                 'hero' => [
-                    'title' => 'Class E',
+                    'title' => 'somthing',
                     'cto' => 'Go to app'
                 ]
             ];

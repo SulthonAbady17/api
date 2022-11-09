@@ -36,4 +36,15 @@ class userModel {
 
         return $this->conn->rowCount();
     }
+
+    public function deleteUser($id)
+    {
+        $sql = "DELETE FROM " . $this->table . " WHERE id=:id";
+
+        $this->conn->query($sql);
+        $this->conn->bind('id', $id);
+        $this->conn->execute();
+
+        return $this->conn->rowCount();
+    }
 }

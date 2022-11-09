@@ -17,13 +17,28 @@ class users extends Api {
                 break;
             case "POST":
                 $data = $_POST;
+                
+                if(!empty($data['name'])) {
+                    if(!empty($data['email'])) {
+                        if(!empty($data['phone'])) {
+                            $result = $this->model('userModel')->addUser($data);
 
-                $res = $this->model('userModel')->addUser($data);
-
-                if($res > 0) {
-                    echo $this->message(201, "success", "user added successfully");
+                            if($result > 0) {
+                                echo $this->message(201, "success", "user added successfully");
+                            } else {
+                                echo $this->message(400, "failed", "user added fail");
+                                break;
+                            }
+                        } else {
+                            echo $this->message(400, "failed", "phone is required");
+                            break;
+                        }
+                    } else {
+                        echo $this->message(400, "failed", "email is required");
+                        break;
+                    }
                 } else {
-                    echo $this->message(409, "failed", "user add failed");
+                    echo $this->message(400, "failed", "name is required");
                     break;
                 }
                 break;
@@ -45,6 +60,16 @@ class users extends Api {
         switch($method) {
             case "GET":
                 echo $this->message(200, "success", $user);
+                break;
+            case "DELETE":
+                $rows = $this->model('userModel')->deleteUser($id);
+
+                $message = [
+                    "response" => "User $id deleted",
+                    "rows" => $rows
+                ];
+                
+                echo $this->message(200, "success", $message);
                 break;
         }
     }
