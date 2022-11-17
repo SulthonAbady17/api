@@ -47,4 +47,18 @@ class userModel {
 
         return $this->conn->rowCount();
     }
+
+    public function editUser($data, $id)
+    {
+        $sql = "UPDATE " . $this->table . " SET name=:name, email=:email, phone=:phone WHERE id=:id";
+
+        $this->conn->query($sql);
+        $this->conn->bind('name', $data['name']);
+        $this->conn->bind('email', $data['email']);
+        $this->conn->bind('phone', $data['phone']);
+        $this->conn->bind('id', $id);
+        $this->conn->execute();
+
+        return $this->conn->rowCount();
+    }
 }
